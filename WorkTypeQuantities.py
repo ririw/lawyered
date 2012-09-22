@@ -14,7 +14,6 @@ class SummingScentenceTag(ContinuousFeature):
       stepSum = 0
       tagged = self.tag(data.string)
       for w in tagged:
-         print w
          if len(w) == 2:
             stepSum += itemToCountFn(w[1])
       return stepSum
