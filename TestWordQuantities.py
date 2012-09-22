@@ -1,16 +1,16 @@
 import unittest
-import WorkTypeQuantities
+import WordTypeQuantities
 from Data import Data
 
 class TestVerbQuantity(unittest.TestCase):
    def test_empty(self):
-      v = WorkTypeQuantities.VerbQuantity()
+      v = WordTypeQuantities.VerbQuantity()
       d = Data("", True)
       assert(v.build(d) == 0)
       d = Data("", False)
       assert(v.build(d) == 0)
    def test_words(self):
-      v = WorkTypeQuantities.VerbQuantity()
+      v = WordTypeQuantities.VerbQuantity()
       cases = {
             """
          Call me Ishmael. Some years ago--never mind how long precisely--having
