@@ -19,9 +19,9 @@ class DataSet(list):
 class FilesDataSet(DataSet):
    def __init__(self, files):
       items = []
-      for (f in files):
+      for f in files:
          reader = csv.reader(f)
          for line in reader:
-            items.append(Data(line[0].strip(), line[1].strip() == "True")
+            items.append(Data(line[0].strip(), line[1].strip() == "True"))
       super(FilesDataSet, self).__init__(items)
 
