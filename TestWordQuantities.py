@@ -2,6 +2,86 @@ import unittest
 import WordTypeQuantities
 from Data import Data
 
+class TestModifierCheck(unittest.TestCase):
+    def test_empty(self):
+        v = WordTypeQuantities.ModifierCheck()
+        d = Data("", True)
+        assert(v.build(d) == 0)
+        d = Data("", False)
+        assert(v.build(d) == 0)
+
+    def test_words(self):
+        v = WordTypeQuantities.ModifierCheck()
+        cases = {"""I was nervous because I had never been in a strip club before, it was like entering a building where people danced on poles for money; it was exactly that type of place.""": 4, 
+                 """Perhaps there are aliens on Mars, we will only truly know when we ask.""": 4,
+                 """Things that seem bad always maybe appear to be worse""": 3}
+        for (words, count) in cases.items():
+            d = Data(words, True)
+            assert(v.build(d) == count)
+            d = Data(words, False)
+            assert(v.build(d) == count)
+        
+
+class TestWordQuantity(unittest.TestCase):
+    def test_empty(self):
+        v = WordTypeQuantities.WordQuantity()
+        d = Data("", True)
+        assert(v.build(d) == 0)
+        d = Data("", False)
+        assert(v.build(d) == 0)
+    
+    def test_words(self):
+        v = WordTypeQuantities.WordQuantity()
+        cases = {"""I was nervous because I had never been in a strip club before, it was like entering a building where people danced on poles for money; it was exactly that type of place.""": 33, 
+                 """Perhaps there are aliens on Mars, we will only truly know when we ask.""": 14,
+                 """Things that seem bad always maybe appear to be worse""": 10}
+        for (words, count) in cases.items():
+            d = Data(words, True)
+            assert(v.build(d) == count)
+            d = Data(words, False)
+            assert(v.build(d) == count)
+       
+
+class TestTentativeCheck(unittest.TestCase):
+    def test_empty(self):
+        v = WordTypeQuantities.TentativeCheck()
+        d = Data("", True)
+        assert(v.build(d) == 0)
+        d = Data("", False)
+        assert(v.build(d) == 0)
+        
+    def test_with_words(self):
+        v = WordTypeQuantities.TentativeCheck()
+        cases = {"""I was nervous because I had never been in  a strip club before, it was like entering a building where people danced on poles for money; it was exactly that type of place.""": 0, 
+                 """Perhaps there are aliens on Mars, we will only truly know when we ask.""": 1,
+                 """Things that seem bad always maybe appear to be worse""": 3}
+        for (words, count) in cases.items():
+            d = Data(words, True)
+            assert(v.build(d) == count)
+            d = Data(words, False)
+            assert(v.build(d) == count)
+
+
+class TestCausationQuantity(unittest.TestCase):
+    def test_empty(self):
+        v = WordTypeQuantities.CausationCheck()
+        d = Data("", True)
+        assert(v.build(d) == 0)
+        d = Data("", False)
+        assert(v.build(d) == 0)
+
+    def test_causation(self):
+        v = WordTypeQuantities.CausationCheck()
+        cases = {"""I am not sorry because   I was merely repeating.""": 1, 
+                 """There are three effects in effects in effects puppies. """: 3,
+                 """The effect of because me turtle.""": 2}
+        for (words, count) in cases.items():
+            d = Data(words, True)
+            assert(v.build(d) == count)
+            d = Data(words, False)
+            assert(v.build(d) == count)
+
+
 class TestVerbQuantity(unittest.TestCase):
    def test_empty(self):
       v = WordTypeQuantities.VerbQuantity()
