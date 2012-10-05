@@ -62,7 +62,7 @@ class TentativeCheck(SummingScentenceTag):
         else:
             return 0
             
-class 1stPersonSingularPro(SummingScentenceTag):
+class firstPersonSingularPro(SummingScentenceTag):
     def sumFn(self, v):
         f = open('1stPersonSingularPronouns.txt')
         1stsingularpro = f.read().split('\n')
