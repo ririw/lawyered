@@ -33,9 +33,9 @@ class ModifierCheck(SummingScentenceTag):
     def sumFn(self,v):
         tags = {"JJ","JJR","JJS","JJT","NR","RB","RBR","RBT","RN","RP","WRB"}
         if v[1] in tags:
-            return 0
-        else:
             return 1
+        else:
+            return 0
 
 class WordQuantity(SummingScentenceTag):
     def sumFn(self,v):
