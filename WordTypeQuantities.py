@@ -21,70 +21,61 @@ class SummingScentenceTag(ContinuousFeature):
    def build(self, data):
       assert(isinstance(data, Data))
       return self.totalBy(self.sumFn, data)
-
-class VerbQuantity(SummingScentenceTag):
+      
+class FileReader(SummingScentenceTag):
+   def __init__(self, filename):
+      super(FileReader, self).__init__(self)
+      f = open(filename)
+      self.testSet = set(f.read().split('\n'))
+      f.close()
    def sumFn(self, v):
-      if "VB" in v[1]:
+      if v[0].lower() in self.testSet:
          return 1
       else:
          return 0
 
+class VerbQuantity(SummingScentenceTag):
+	def sumFn(self, v):
+		if "VB" in v[1]:
+			return 1
+		else:
+			return 0
+
 class ModifierCheck(SummingScentenceTag):
-    def sumFn(self,v):
-        tags = {"JJ","JJR","JJS","JJT","NR","RB","RBR","RBT","RN","RP","WRB"}
-        if v[1] in tags:
-            return 1
-        else:
-            return 0
+	def sumFn(self,v):
+		tags = {"JJ","JJR","JJS","JJT","NR","RB","RBR","RBT","RN","RP","WRB"}
+		if v[1] in tags:
+			return 1
+		else:
+			return 0
 
 class WordQuantity(SummingScentenceTag):
-    def sumFn(self,v):
-        if v[0] in string.punctuation:
-            return 0    
-        else:
-            return 1
+	def sumFn(self,v):
+		if v[0] in string.punctuation:
+			return 0    
+		else:
+			return 1
 
-class CausationCheck(SummingScentenceTag):
-    def sumFn(self, v):
-        f = open('Causation.txt')
-        causationWords = f.read().split('\n')
-        if v[0].lower() in causationWords:
-            return 1
-        else:
-            return 0
+class CausationCheck(FileReader):
+	def __init__(self):
+		super(CausationCheck, self).__init__(self, 'Causation.txt')
 
-class TentativeCheck(SummingScentenceTag):
-    def sumFn(self, v):
-        f = open('Tentative.txt')
-        tentativeWords = f.read().split('\n')
-        if v[0].lower() in tentativeWords:
-            return 1
-        else:
-            return 0
+class TentativeCheck(FileReader):
+	def __init__(self):
+		super(TentativeCheck, self).__init__(self, 'Tentative.txt')
             
-class firstPersonSingularPronoun(SummingScentenceTag):
-    def sumFn(self, v):
-        f = open('1stPersonSingularPronouns.txt')
-        singularPronoun = f.read().split('\n')
-        if v[0].lower() in singularPronoun:
-            return 1
-        else:
-            return 0
+class FirstPersonSingularPronoun(FileReader):
+	def __init__(self):
+		super(FirstPersonSingularPronoun, self).__init__(self, '1stPersonSingularPronouns.txt')
 
-class firstPersonPluralPronoun(SummingScentenceTag):
-    def sumFn(self, v):
-        f = open('1stPersonPluralPronouns.txt')
-        pluralPronoun = f.read().split('\n')
-        if v[0].lower() in pluralPronoun:
-            return 1
-        else:
-            return 0
+class FirstPersonPluralPronoun(FileReader):
+	def __init__(self):
+		super(FirstPersonPluralPronoun, self).__init__(self, '1stPersonPronouns.txt')
 
-class thirdPersonPronoun(SummingScentenceTag):
-    def sumFn(self, v):
-        f = open('3rdPersonPronouns.txt')
-        thirdPronoun = f.read().split('\n')
-        if v[0].lower() in thirdPronoun:
-            return 1
-        else:
-            return 0
+class ThirdPersonPronoun(FileReader):
+	def __init__(self):
+		super(ThirdPersonPronoun, self).__init__(self, '3rdPersonPronouns.txt')
+            
+class GeneralizingTermsCheck(FileReader):
+   def __init__(self):
+   	super(GeneralizingTermsCheck, self).__init__(self, 'GeneralizingTerms.txt')
