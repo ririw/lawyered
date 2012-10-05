@@ -62,11 +62,29 @@ class TentativeCheck(SummingScentenceTag):
         else:
             return 0
             
-class firstPersonSingularPro(SummingScentenceTag):
+class firstPersonSingularPronoun(SummingScentenceTag):
     def sumFn(self, v):
         f = open('1stPersonSingularPronouns.txt')
-        1stsingularpro = f.read().split('\n')
-        if v[0].lower() in 1stsingularpro:
+        singularPronoun = f.read().split('\n')
+        if v[0].lower() in singularPronoun:
+            return 1
+        else:
+            return 0
+
+class firstPersonPluralPronoun(SummingScentenceTag):
+    def sumFn(self, v):
+        f = open('1stPersonPluralPronouns.txt')
+        pluralPronoun = f.read().split('\n')
+        if v[0].lower() in pluralPronoun:
+            return 1
+        else:
+            return 0
+
+class thirdPersonPronoun(SummingScentenceTag):
+    def sumFn(self, v):
+        f = open('3rdPersonPronouns.txt')
+        thirdPronoun = f.read().split('\n')
+        if v[0].lower() in thirdPronoun:
             return 1
         else:
             return 0
