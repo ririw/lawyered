@@ -9,6 +9,8 @@ class Feature(object):
    def build(self, data):
       """Generate the feature for some string"""
       pass
+   def name(self):
+      return self.__class__.__name__
 class ContinuousFeature(Feature):
    pass
 class DiscreetFeature(Feature):
