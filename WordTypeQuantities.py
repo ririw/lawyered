@@ -24,7 +24,7 @@ class SummingScentenceTag(ContinuousFeature):
       
 class FileReader(SummingScentenceTag):
    def __init__(self, filename):
-      super(FileReader, self).__init__(self)
+      super(FileReader, self).__init__()
       f = open(filename)
       self.testSet = set(f.read().split('\n'))
       f.close()
@@ -58,24 +58,32 @@ class WordQuantity(SummingScentenceTag):
 
 class CausationCheck(FileReader):
 	def __init__(self):
-		super(CausationCheck, self).__init__(self, 'Causation.txt')
+		super(CausationCheck, self).__init__('Causation.txt')
 
 class TentativeCheck(FileReader):
 	def __init__(self):
-		super(TentativeCheck, self).__init__(self, 'Tentative.txt')
+		super(TentativeCheck, self).__init__('Tentative.txt')
             
 class FirstPersonSingularPronoun(FileReader):
 	def __init__(self):
-		super(FirstPersonSingularPronoun, self).__init__(self, '1stPersonSingularPronouns.txt')
+		super(FirstPersonSingularPronoun, self).__init__('1stPersonSingularPronouns.txt')
 
 class FirstPersonPluralPronoun(FileReader):
 	def __init__(self):
-		super(FirstPersonPluralPronoun, self).__init__(self, '1stPersonPronouns.txt')
+		super(FirstPersonPluralPronoun, self).__init__('1stPersonPronouns.txt')
 
 class ThirdPersonPronoun(FileReader):
 	def __init__(self):
-		super(ThirdPersonPronoun, self).__init__(self, '3rdPersonPronouns.txt')
-            
+		super(ThirdPersonPronoun, self).__init__('3rdPersonPronouns.txt')
+		
+class SensoryRatioCheck(FileReader):
+	def __init__(self):
+		super(SensoryRatioCheck, self).__init__('Sensory.txt')
+		
+class MotionTermsCheck(FileReader):
+	def __init__(self):
+		super(MotionTermsCheck, self).__init__('MotionTerms.txt')
+	            
 class GeneralizingTermsCheck(FileReader):
    def __init__(self):
-   	super(GeneralizingTermsCheck, self).__init__(self, 'GeneralizingTerms.txt')
+   	super(GeneralizingTermsCheck, self).__init__('GeneralizingTerms.txt')
