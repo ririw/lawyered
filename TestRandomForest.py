@@ -1,10 +1,10 @@
 import unittest
 from TestSciKitClassifier import TestSciKitClassifier
-import NaiveBayes
+import RandomForest
 
-class TestNaiveBayes(unittest.TestCase, TestSciKitClassifier):
+class TestRandomForest(unittest.TestCase, TestSciKitClassifier):
    def testedClass(self):
-      return NaiveBayes.NaiveBayes
+      return RandomForest.RandomForest
 
 if __name__=="__main__":
    unittest.main()
