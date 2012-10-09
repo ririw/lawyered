@@ -35,6 +35,11 @@ class SciKitLearner(object):
       pred_class = self.learner.predict(testFeatures)
       total_errors = (pred_class != np.array(testClasses)).sum()
       self.accuracy = 1.0 - float(total_errors)/float(len(testClasses))
+      trueAnswers = len(filter(lambda c: c.isTrue, trainSet))
+      falseAnswers = len(filter(lambda c: c.isTrue, trainSet))
+      majorityAccuracy = float(max(trueAnswers, falseAnswers))/ \
+            float(trueAnswers + falseAnswers)
+      self.lift = (self.accuracy - majorityAccuracy)/(1.0-majorityAccuracy)
 
    def classify(self, instances):
       features = []

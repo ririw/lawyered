@@ -3,7 +3,7 @@ from Data import Data
 import nltk
 import string
 
-prefix = None
+prefix = ""
 
 class SummingScentenceTag(ContinuousFeature):
    def tag(self, data):
@@ -60,35 +60,35 @@ class WordQuantity(SummingScentenceTag):
 
 class CausationCheck(FileReader):
 	def __init__(self):
-		super(CausationCheck, self).__init__(prefix + '/resources/Causation.txt')
+		super(CausationCheck, self).__init__(prefix + 'resources/Causation.txt')
 
 class TentativeCheck(FileReader):
 	def __init__(self):
-		super(TentativeCheck, self).__init__(prefix + '/resources/Tentative.txt')
+		super(TentativeCheck, self).__init__(prefix + 'resources/Tentative.txt')
             
 class FirstPersonSingularPronoun(FileReader):
 	def __init__(self):
-		super(FirstPersonSingularPronoun, self).__init__(prefix + '/resources/1stPersonSingularPronouns.txt')
+		super(FirstPersonSingularPronoun, self).__init__(prefix + 'resources/1stPersonSingularPronouns.txt')
 
 class FirstPersonPluralPronoun(FileReader):
 	def __init__(self):
-		super(FirstPersonPluralPronoun, self).__init__(prefix + '/resources/1stPersonPronouns.txt')
+		super(FirstPersonPluralPronoun, self).__init__(prefix + 'resources/1stPersonPronouns.txt')
 
 class ThirdPersonPronoun(FileReader):
 	def __init__(self):
-		super(ThirdPersonPronoun, self).__init__(prefix + '/resources/3rdPersonPronouns.txt')
+		super(ThirdPersonPronoun, self).__init__(prefix + 'resources/3rdPersonPronouns.txt')
 		
 class SensoryRatioCheck(FileReader):
 	def __init__(self):
-		super(SensoryRatioCheck, self).__init__(prefix + '/resources/Sensory.txt')
+		super(SensoryRatioCheck, self).__init__(prefix + 'resources/Sensory.txt')
 		
 class MotionTermsCheck(FileReader):
 	def __init__(self):
-		super(MotionTermsCheck, self).__init__(prefix + '/resources/MotionTerms.txt')
+		super(MotionTermsCheck, self).__init__(prefix + 'resources/MotionTerms.txt')
 	            
 class GeneralizingTermsCheck(FileReader):
    def __init__(self):
-   	super(GeneralizingTermsCheck, self).__init__(prefix + '/resources/GeneralizingTerms.txt')
+   	super(GeneralizingTermsCheck, self).__init__(prefix + 'resources/GeneralizingTerms.txt')
 
 featureList = [
       VerbQuantity,
