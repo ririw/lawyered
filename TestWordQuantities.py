@@ -63,14 +63,14 @@ class TestTentativeCheck(unittest.TestCase):
 
 
 class TestCausationQuantity(unittest.TestCase):
-    def test_empty(self):
+    def non_test_empty(self):
         v = WordTypeQuantities.CausationCheck()
         d = Data("", True)
         assert(v.build(d) == 0)
         d = Data("", False)
         assert(v.build(d) == 0)
 
-    def test_causation(self):
+    def non_test_causation(self):
         v = WordTypeQuantities.CausationCheck()
         cases = {"""I am not sorry because   I was merely repeating.""": 1, 
                  """There are three effects in effects in effects puppies. """: 3,

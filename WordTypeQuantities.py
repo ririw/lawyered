@@ -3,6 +3,8 @@ from Data import Data
 import nltk
 import string
 
+prefix = None
+
 class SummingScentenceTag(ContinuousFeature):
    def tag(self, data):
       """Break the string in data down into 
@@ -58,32 +60,49 @@ class WordQuantity(SummingScentenceTag):
 
 class CausationCheck(FileReader):
 	def __init__(self):
-		super(CausationCheck, self).__init__('Causation.txt')
+		super(CausationCheck, self).__init__(prefix + '/resources/Causation.txt')
 
 class TentativeCheck(FileReader):
 	def __init__(self):
-		super(TentativeCheck, self).__init__('Tentative.txt')
+		super(TentativeCheck, self).__init__(prefix + '/resources/Tentative.txt')
             
 class FirstPersonSingularPronoun(FileReader):
 	def __init__(self):
-		super(FirstPersonSingularPronoun, self).__init__('1stPersonSingularPronouns.txt')
+		super(FirstPersonSingularPronoun, self).__init__(prefix + '/resources/1stPersonSingularPronouns.txt')
 
 class FirstPersonPluralPronoun(FileReader):
 	def __init__(self):
-		super(FirstPersonPluralPronoun, self).__init__('1stPersonPronouns.txt')
+		super(FirstPersonPluralPronoun, self).__init__(prefix + '/resources/1stPersonPronouns.txt')
 
 class ThirdPersonPronoun(FileReader):
 	def __init__(self):
-		super(ThirdPersonPronoun, self).__init__('3rdPersonPronouns.txt')
+		super(ThirdPersonPronoun, self).__init__(prefix + '/resources/3rdPersonPronouns.txt')
 		
 class SensoryRatioCheck(FileReader):
 	def __init__(self):
-		super(SensoryRatioCheck, self).__init__('Sensory.txt')
+		super(SensoryRatioCheck, self).__init__(prefix + '/resources/Sensory.txt')
 		
 class MotionTermsCheck(FileReader):
 	def __init__(self):
-		super(MotionTermsCheck, self).__init__('MotionTerms.txt')
+		super(MotionTermsCheck, self).__init__(prefix + '/resources/MotionTerms.txt')
 	            
 class GeneralizingTermsCheck(FileReader):
    def __init__(self):
-   	super(GeneralizingTermsCheck, self).__init__('GeneralizingTerms.txt')
+   	super(GeneralizingTermsCheck, self).__init__(prefix + '/resources/GeneralizingTerms.txt')
+
+featureList = [
+      VerbQuantity,
+      ModifierCheck,
+      WordQuantity,
+      CausationCheck,
+      TentativeCheck,
+      FirstPersonSingularPronoun,
+      FirstPersonPluralPronoun,
+      ThirdPersonPronoun,
+      SensoryRatioCheck,
+      MotionTermsCheck,
+      GeneralizingTermsCheck
+   ]  
+
+
+
