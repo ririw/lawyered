@@ -50,11 +50,11 @@ if __name__ == "__main__":
          (LexicalDiversity.featureList + WordTypeQuantities.featureList))
 
    learners = None
-   if args.f:
+   if args.t:
       # learn from the provided files
-      learningData = Data.FilesDataSet(map(file, args.f))
-      testSet = Data.DataSet(learningData[:-(len(learningData)/10)])
-      trainSet = Data.DataSet(learningData[9*((len(learningData)/10)):])
+      learningData = Data.FilesDataSet(map(file, args.t))
+      testSet = Data.DataSet(learningData[:8*(len(learningData)/10)])
+      trainSet = Data.DataSet(learningData[8*((len(learningData)/10)):])
       for s in trainSet:
          print s
       print "#####"
@@ -67,7 +67,6 @@ if __name__ == "__main__":
          print learner[0]
          print "\tAccuracy: " + str(learner[1].accuracy)
          print "\tLift: " + str(learner[1].lift*100)
-      classificationData = Data.FilesDataSet(map(file, args.t))
    else:
       if args.l:
          with open(args.l) as f:
@@ -75,14 +74,14 @@ if __name__ == "__main__":
       else:
          if pwd:
             classifierLoadPath = pwd + \
-               "/resources/defualtClassifiers.pickle"
+               "/resources/defaultClassifiers.pickle"
          else:
             classifierLoadPath = "resources/defaultClassifiers.pickle"
          with open(classifierLoadPath) as f:
            learners = pickle.load(f)
 
    
-   if args.files:
+   if args.f:
       print "Classifying"
       pass
       
