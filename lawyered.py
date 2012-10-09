@@ -36,7 +36,7 @@ parser.add_argument(
    '-l',
    metavar='classifierLoadFile', 
    type=str,
-   help='Where to load the classifiers (overrides -t argument) [WARNING: NEVER LOAD UNTRUSTED CLASSIFIERS]')
+   help='Where to load the classifiers (overrides -t argument)\n [WARNING: NEVER LOAD UNTRUSTED CLASSIFIERS]')
 
 
 if __name__ == "__main__":
@@ -69,20 +69,21 @@ if __name__ == "__main__":
          print "\tLift: " + str(learner[1].lift*100)
       classificationData = Data.FilesDataSet(map(file, args.t))
    else:
-      if args.classifierLoadFile:
-         with open(args.classifierLoadFile) as f:
+      if args.l:
+         with open(args.l) as f:
             learners = pickle.load(f)
       else:
          if pwd:
             classifierLoadPath = pwd + \
                "/resources/defualtClassifiers.pickle"
          else:
-            classifierLoadPath = "resources/defualtClassifiers.pickle"
+            classifierLoadPath = "resources/defaultClassifiers.pickle"
          with open(classifierLoadPath) as f:
            learners = pickle.load(f)
 
    
    if args.files:
+      print "Classifying"
       pass
       
    if args.s:
