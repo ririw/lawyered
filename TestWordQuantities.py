@@ -11,7 +11,7 @@ class TestGeneralizingTermsCheck(unittest.TestCase):
         assert(v.build(d) == 0)
 
     def test_words(self):
-        v = WordTypeQuantities.GeneralizingTermsCheck()
+        v = WordTypeQuantities.GeneralizingTermsCheck()      
         cases = {"""Was anybody else there? asked Mr. Pumblechook.""": 1, 
                  """Yes, said I. Estella waved a blue flag, and I waved a red one, and Miss Havisham waved one sprinkled all over with little gold stars, out at the coach-window. And then we all waved our swords and hurrahed.""": 2}
         for (words, count) in cases.items():
