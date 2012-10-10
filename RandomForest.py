@@ -5,5 +5,3 @@ class RandomForest(SciKitLearner):
    def __init__(self, testSet, trainSet, classifiers):
       super(RandomForest, self).\
             __init__(testSet, trainSet, classifiers, RandomForestClassifier())
-   def predict(self,example):
-      print example

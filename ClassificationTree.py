@@ -8,5 +8,3 @@ class ClassificationTree(SciKitLearner):
       super(ClassificationTree, self).\
             __init__(testSet, trainSet, classifiers, 
                   tree.DecisionTreeClassifier())
-   def predict(self, examples):
-      self.classify(examples)

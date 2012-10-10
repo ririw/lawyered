@@ -37,6 +37,11 @@ parser.add_argument(
    metavar='classifierLoadFile', 
    type=str,
    help='Where to load the classifiers (overrides -t argument)\n [WARNING: NEVER LOAD UNTRUSTED CLASSIFIERS]')
+parser.add_argument(
+   '-c',
+   metavar='learningAlgorithm',
+   type=str,
+   help='Select the type of learning algorithm {NaiveBayes, RandomForest, ClassificationTree}')
 
 
 if __name__ == "__main__":
@@ -50,6 +55,12 @@ if __name__ == "__main__":
          (LexicalDiversity.featureList + WordTypeQuantities.featureList))
 
    learners = None
+   if args.c:
+      # default classifier is RandomForest
+      classifier = args.c
+   else:
+      classifier = 'RandomForest'
+
    if args.t:
       # learn from the provided files
       learningData = Data.FilesDataSet(map(file, args.t))
@@ -63,10 +74,10 @@ if __name__ == "__main__":
       learners = dict(map(
          lambda c: (c[0], c[1](testSet, trainSet, features)),
             Learners.learners.items()))
-      for learner in learners.items():
-         print learner[0]
-         print "\tAccuracy: " + str(learner[1].accuracy)
-         print "\tLift: " + str(learner[1].lift*100)
+      #import debug
+      learner = Learners.learners[classifier](testSet, trainSet, features)
+      print "\tAccuracy: " + str(learner.accuracy)
+      print "\tLift: " + str(learner.lift*100)
    else:
       if args.l:
          with open(args.l) as f:
@@ -79,6 +90,7 @@ if __name__ == "__main__":
             classifierLoadPath = "resources/defaultClassifiers.pickle"
          with open(classifierLoadPath) as f:
             learners = pickle.load(f)
+      learner = Learners.learners[classifier]
 
    
    if args.f:
@@ -86,8 +98,11 @@ if __name__ == "__main__":
       # Assuming we are using the entire test set
       # from a previously loaded model(s) in "learners"
       testData = Data.FilesDataSet(map(file, args.f))
-      for learner in learners.items():
-         print learner[1].predict(testData[0]) 
+      learner = learners[classifier]
+      for example in testData:
+          print example
+          classification = learner.predict(example) 
+          print classification
       
    if args.s:
       print learners
