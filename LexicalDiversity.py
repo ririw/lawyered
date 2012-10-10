@@ -10,4 +10,5 @@ class LexicalDiversity(ContinuousFeature):
       tokens = nltk.word_tokenize(ldata)
       return float(len(set(tokens)))/float(len(tokens))
 
-featureList = [LexicalDiversity]
+#featureList = [LexicalDiversity]
+featureList = []

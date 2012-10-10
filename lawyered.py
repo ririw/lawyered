@@ -78,12 +78,16 @@ if __name__ == "__main__":
          else:
             classifierLoadPath = "resources/defaultClassifiers.pickle"
          with open(classifierLoadPath) as f:
-           learners = pickle.load(f)
+            learners = pickle.load(f)
 
    
    if args.f:
-      print "Classifying"
-      pass
+      print "\nClassifying using file: ", args.f
+      # Assuming we are using the entire test set
+      # from a previously loaded model(s) in "learners"
+      testData = Data.FilesDataSet(map(file, args.f))
+      for learner in learners.items():
+         print learner[1].predict(testData[0]) 
       
    if args.s:
       print learners

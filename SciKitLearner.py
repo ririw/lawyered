@@ -49,3 +49,6 @@ class SciKitLearner(object):
             feature.append(classifier.build(instance))
          features.append(feature)
       return map(lambda r: self.inverseClassMap[r], self.learner.predict(features))
+   
+   def predict(self, example):
+      print self.learner.predict(example)
