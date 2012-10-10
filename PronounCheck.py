@@ -11,11 +11,12 @@ import nltk
 
 class PronounCheck(ContinuousFeature):
    def build(self, data):
+       
+      count = 0
       pdata = nltk.word_tokenize(data)
       tagged_data = nltk.pos_tag(pdata)
       
       for (word, tag) in tagged_data:
-          if tag.startswith('PNP'):
-              print word
-              
-      return 0
+          if tag.startswith('PRP'):
+              count += 1
+      return count
