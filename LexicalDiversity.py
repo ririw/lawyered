@@ -11,5 +11,4 @@ class LexicalDiversity(ContinuousFeature):
       tokens = tokenizeAndLowercase(ldata)
       return float(len(set(tokens)))/float(len(tokens))
 
-#featureList = [LexicalDiversity]
-featureList = []
+featureList = [LexicalDiversity]
