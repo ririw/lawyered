@@ -4,4 +4,5 @@ test:
 	python -m unittest TestNaiveBayes
 	python -m unittest TestTree
 	python -m unittest TestRandomForest
+	python -m unittest TestPronounCheck
 

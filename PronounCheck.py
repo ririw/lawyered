@@ -14,4 +14,8 @@ class PronounCheck(ContinuousFeature):
       pdata = nltk.word_tokenize(data)
       tagged_data = nltk.pos_tag(pdata)
       
+      for (word, tag) in tagged_data:
+          if tag.startswith('PNP'):
+              print word
+              
       return 0
