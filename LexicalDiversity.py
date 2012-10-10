@@ -1,5 +1,6 @@
 from Data import Data
 from Feature import ContinuousFeature
+from Util import tokenizeAndLowercase
 import string
 import nltk
 
@@ -7,7 +8,7 @@ import nltk
 class LexicalDiversity(ContinuousFeature):
    def build(self, data):
       ldata = filter(lambda s: s in string.lowercase or s in string.whitespace, data.string.lower())
-      tokens = nltk.word_tokenize(ldata)
+      tokens = tokenizeAndLowercase(ldata)
       return float(len(set(tokens)))/float(len(tokens))
 
 featureList = [LexicalDiversity]
