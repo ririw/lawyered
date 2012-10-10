@@ -21,7 +21,7 @@ class TestLexicalDiversity(unittest.TestCase):
       random.shuffle(allStrings)
       theString = ' '.join(allStrings)
       l = LexicalDiversity.LexicalDiversity()
-      assert((l.build(theString)) == float(len(uniqueStrings))/float(len(uniqueStrings)*numExtraStrings))
+      assert((l.build(Data.Data(theString, True))) == float(len(uniqueStrings))/float(len(uniqueStrings)*numExtraStrings))
 
 if __name__ == "__main__":
    unittest.main()
