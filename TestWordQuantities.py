@@ -2,6 +2,81 @@ import unittest
 import WordTypeQuantities
 from Data import Data
 
+class TestGeneralizingTermsCheck(unittest.TestCase):
+    def test_empty(self):
+        v = WordTypeQuantities.ModifierCheck()
+        d = Data("", True)
+        assert(v.build(d) == 0)
+        d = Data("", False)
+        assert(v.build(d) == 0)
+
+    def test_words(self):
+        v = WordTypeQuantities.GeneralizingTermsCheck()
+        cases = {"""Was anybody else there? asked Mr. Pumblechook.""": 1, 
+                 """Yes, said I. Estella waved a blue flag, and I waved a red one, and Miss Havisham waved one sprinkled all over with little gold stars, out at the coach-window. And then we all waved our swords and hurrahed.""": 2}
+        for (words, count) in cases.items():
+            d = Data(words, True)
+            assert(v.build(d) == count)
+            d = Data(words, False)
+            assert(v.build(d) == count)
+
+
+class TestThirdPersonPronoun(unittest.TestCase):
+    def test_empty(self):
+        v = WordTypeQuantities.ModifierCheck()
+        d = Data("", True)
+        assert(v.build(d) == 0)
+        d = Data("", False)
+        assert(v.build(d) == 0)
+
+    def test_words(self):
+        v = WordTypeQuantities.ThirdPersonPronoun()
+        cases = {"""Joe, who had ventured into the kitchen after me as the dustpan had retired before us, drew the back of his hand across his nose with a conciliatory air, when Mrs. Joe darted a look at him, and, when her eyes were withdrawn, secretly crossed his two forefingers, and exhibited them to me, as our token that Mrs. Joe was in a cross temper. This was so much her normal state, that Joe and I would often, for weeks together, be, as to our fingers, like monumental Crusaders as to their legs.""": 4, 
+                 """No; I should not have minded that, if they would only have left me alone. But they wouldn't leave me alone.""": 2,
+                 """Biddy looked down at her child, and put its little hand to her lips, and then put the good matronly hand with which she had touched it into mine.""": 4}
+        for (words, count) in cases.items():
+            d = Data(words, True)
+            assert(v.build(d) == count)
+            d = Data(words, False)
+            assert(v.build(d) == count)
+
+class TestFirstPersonPluralPronoun(unittest.TestCase):
+    def test_empty(self):
+        v = WordTypeQuantities.ModifierCheck()
+        d = Data("", True)
+        assert(v.build(d) == 0)
+        d = Data("", False)
+        assert(v.build(d) == 0)
+
+    def test_words(self):
+        v = WordTypeQuantities.FirstPersonPluralPronoun()
+        cases = {"""My sister was not in a very bad temper when we presented ourselves in the kitchen, and Joe was encouraged by that unusual circumstance to tell her about the bright shilling. A bad un, I'll be bound, said Mrs. Joe triumphantly, or he wouldn't have given it to the boy! Let's look at it.""": 2, 
+                 """As we were going with our candle along the dark passage, Estella stopped all of a sudden, and, facing round, said in her taunting manner, with her face quite close to mine""": 2,
+                 """Us two being now alone, sir,began Joe.""": 1}
+        for (words, count) in cases.items():
+            d = Data(words, True)
+            assert(v.build(d) == count)
+            d = Data(words, False)
+            assert(v.build(d) == count)
+
+class TestFirstPersonSingularPronoun(unittest.TestCase):
+    def test_empty(self):
+        v = WordTypeQuantities.ModifierCheck()
+        d = Data("", True)
+        assert(v.build(d) == 0)
+        d = Data("", False)
+        assert(v.build(d) == 0)
+
+    def test_words(self):
+        v = WordTypeQuantities.FirstPersonSingularPronoun()
+        cases = {"""So, I called myself Pip, and came to be called Pip.""": 2, 
+                 """After darkly looking at his leg and me several times, he came closer to my tombstone, took me by both arms, and tilted me back as far as he could hold me; so that his eyes looked most powerfully down into mine, and mine looked most helplessly up into his.""": 7}
+        for (words, count) in cases.items():
+            d = Data(words, True)
+            assert(v.build(d) == count)
+            d = Data(words, False)
+            assert(v.build(d) == count)
+
 class TestModifierCheck(unittest.TestCase):
     def test_empty(self):
         v = WordTypeQuantities.ModifierCheck()
