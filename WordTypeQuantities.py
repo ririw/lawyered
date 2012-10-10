@@ -72,7 +72,7 @@ class FirstPersonSingularPronoun(FileReader):
 
 class FirstPersonPluralPronoun(FileReader):
 	def __init__(self):
-		super(FirstPersonPluralPronoun, self).__init__(prefix + 'resources/1stPersonPronouns.txt')
+		super(FirstPersonPluralPronoun, self).__init__(prefix + 'resources/1stPersonPluralPronouns.txt')
 
 class ThirdPersonPronoun(FileReader):
 	def __init__(self):
@@ -88,7 +88,7 @@ class MotionTermsCheck(FileReader):
 	            
 class GeneralizingTermsCheck(FileReader):
    def __init__(self):
-   	super(GeneralizingTermsCheck, self).__init__(prefix + 'resources/GeneralizingTerms.txt')
+        super(GeneralizingTermsCheck, self).__init__(prefix + 'resources/GeneralizingTerms.txt')
 
 featureList = [
       VerbQuantity,

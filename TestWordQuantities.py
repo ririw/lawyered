@@ -4,7 +4,7 @@ from Data import Data
 
 class TestGeneralizingTermsCheck(unittest.TestCase):
     def test_empty(self):
-        v = WordTypeQuantities.ModifierCheck()
+        v = WordTypeQuantities.GeneralizingTermsCheck()
         d = Data("", True)
         assert(v.build(d) == 0)
         d = Data("", False)
@@ -19,7 +19,6 @@ class TestGeneralizingTermsCheck(unittest.TestCase):
             assert(v.build(d) == count)
             d = Data(words, False)
             assert(v.build(d) == count)
-
 
 class TestThirdPersonPronoun(unittest.TestCase):
     def test_empty(self):
@@ -76,7 +75,7 @@ class TestFirstPersonSingularPronoun(unittest.TestCase):
             assert(v.build(d) == count)
             d = Data(words, False)
             assert(v.build(d) == count)
-
+			
 class TestModifierCheck(unittest.TestCase):
     def test_empty(self):
         v = WordTypeQuantities.ModifierCheck()
