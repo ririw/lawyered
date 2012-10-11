@@ -30,8 +30,8 @@ class FileReader(SummingScentenceTag):
       f = open(filename)
       self.testSet = set(f.read().split('\n'))
       f.close()
-   def sumFn(self, v):
-      if v[0].lower() in self.testSet:
+   def sumFn(self, v):  
+      if str(v[0]).lower() in self.testSet:
          return 1
       else:
          return 0
@@ -53,7 +53,7 @@ class ModifierCheck(SummingScentenceTag):
 
 class WordQuantity(SummingScentenceTag):
 	def sumFn(self,v):
-		if v[0] in string.punctuation:
+		if str(v[0]) in string.punctuation:
 			return 0    
 		else:
 			return 1

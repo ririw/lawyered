@@ -23,20 +23,20 @@ class SciKitLearner(object):
          for classifier in classifiers:
             testFeature.append(classifier.build(instance))
          testFeatures.append(testFeature)
-         testClasses.append(classMap[instance.isTrue])
+         testClasses.append(classMap[instance.tag])
       for instance in trainSet:
          trainFeature = []
          for classifier in classifiers:
             trainFeature.append(classifier.build(instance))
          trainFeatures.append(trainFeature)
-         trainClasses.append(classMap[instance.isTrue])
+         trainClasses.append(classMap[instance.tag])
 
       self.learner = learner.fit(trainFeatures, trainClasses)
       pred_class = self.learner.predict(testFeatures)
       total_errors = (pred_class != np.array(testClasses)).sum()
       self.accuracy = 1.0 - float(total_errors)/float(len(testClasses))
-      trueAnswers = len(filter(lambda c: c.isTrue, trainSet))
-      falseAnswers = len(filter(lambda c: c.isTrue, trainSet))
+      trueAnswers = len(filter(lambda c: c.tag, trainSet))
+      falseAnswers = len(filter(lambda c: c.tag, trainSet))
       majorityAccuracy = float(max(trueAnswers, falseAnswers))/ \
             float(trueAnswers + falseAnswers)
       self.lift = (self.accuracy - majorityAccuracy)/(1.0-majorityAccuracy)

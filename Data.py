@@ -3,14 +3,11 @@ import csv
 class Data(object):
    """A data point. The string can be accessed through Data.string and the
    truthfulness through Data.isTrue"""
-   def __init__(self, string, isTrue):
+   def __init__(self, string, tag):
       self.string = string
-      self.isTrue = isTrue
+      self.tag = tag
    def __str__(self):
-      if self.isTrue:
-         return "Truth: \"%s\"" % self.string
-      else:
-         return "Lie: \"%s\"" % self.string
+      return str(self.tag) + " | " + str(self.string)
 
 class DataSet(list):
    """DataSets extend list, so access them in the obvious way"""

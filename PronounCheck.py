@@ -13,7 +13,7 @@ class PronounCheck(ContinuousFeature):
    def build(self, data):
        
       count = 0
-      pdata = nltk.word_tokenize(data)
+      pdata = nltk.word_tokenize(str(data.string))
       tagged_data = nltk.pos_tag(pdata)
       
       for (word, tag) in tagged_data:
