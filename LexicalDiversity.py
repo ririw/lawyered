@@ -7,6 +7,8 @@ import nltk
 
 class LexicalDiversity(ContinuousFeature):
    def build(self, data):
+      if (type(data) == int):
+         import debug
       ldata = filter(lambda s: s in string.lowercase or s in string.whitespace, data.string.lower())
       tokens = tokenizeAndLowercase(ldata)
       return float(len(set(tokens)))/float(len(tokens))

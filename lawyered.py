@@ -66,11 +66,11 @@ if __name__ == "__main__":
       learningData = Data.FilesDataSet(map(file, args.t))
       testSet = Data.DataSet(learningData[:8*(len(learningData)/10)])
       trainSet = Data.DataSet(learningData[8*((len(learningData)/10)):])
-      for s in trainSet:
-         print s
-      print "#####"
-      for s in testSet:
-         print s
+      #for s in trainSet:
+         #print s
+      #print "#####"
+      #for s in testSet:
+         #print s
       learners = dict(map(
          lambda c: (c[0], c[1](testSet, trainSet, features)),
             Learners.learners.items()))
@@ -100,7 +100,7 @@ if __name__ == "__main__":
       testData = Data.FilesDataSet(map(file, args.f))
       learner = learners[classifier]
       for example in testData:
-          print example
+          print example.string
           classification = learner.predict(example) 
           print classification
       

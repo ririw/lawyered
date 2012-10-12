@@ -1,6 +1,13 @@
 from sklearn.naive_bayes import GaussianNB
 from Data import DataSet
 import numpy as np
+from multiprocessing import Pool
+
+def classify_instance(classifiers, classMap, instance):
+   testFeature = []
+   for classifier in classifiers:
+      testFeature.append(classifier.build(instance))
+   return (testFeature, classMap[instance.tag])
 
 class SciKitLearner(object):
    def __init__(self, testSet, trainSet, classifiers, learner):
@@ -18,18 +25,28 @@ class SciKitLearner(object):
 
       self.classifiers = classifiers
 
-      for instance in testSet:
-         testFeature = []
-         for classifier in classifiers:
-            testFeature.append(classifier.build(instance))
-         testFeatures.append(testFeature)
-         testClasses.append(classMap[instance.tag])
-      for instance in trainSet:
-         trainFeature = []
-         for classifier in classifiers:
-            trainFeature.append(classifier.build(instance))
-         trainFeatures.append(trainFeature)
-         trainClasses.append(classMap[instance.tag])
+      if True:
+         for num_instance in enumerate(testSet):
+            instance = num_instance[1]
+            print float(num_instance[0])/float(len(testSet))
+            testFeature = []
+            for classifier in classifiers:
+               testFeature.append(classifier.build(instance))
+            testFeatures.append(testFeature)
+            testClasses.append(classMap[instance.tag])
+         for num_instance in enumerate(trainSet):
+            instance = num_instance[1]
+            print float(num_instance[0])/float(len(trainSet))
+            trainFeature = []
+            for classifier in classifiers:
+               trainFeature.append(classifier.build(instance))
+            trainFeatures.append(trainFeature)
+            trainClasses.append(classMap[instance.tag])
+      else:
+         #see: http://stackoverflow.com/questions/5917522/unzipping-and-the-operator for an explanation of this unzip approach
+         pool = Pool(processes=4)
+         testFeatures, testClasses = zip(*(list(pool.map(lambda instance: classify_instance(classifiers, classMap, instance), testSet))))
+         trainFeatures, trainClasses = zip(*(list(pool.map(lambda instance: classify_instance(classifiers, classMap, instance), trainSet))))
 
       self.learner = learner.fit(trainFeatures, trainClasses)
       pred_class = self.learner.predict(testFeatures)
