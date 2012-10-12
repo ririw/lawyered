@@ -2,6 +2,44 @@ import unittest
 import WordTypeQuantities
 from Data import Data
 
+class TestSensoryRatioCheck(unittest.TestCase):
+    def test_empty(self):
+        v = WordTypeQuantities.SensoryRatioCheck()
+        d = Data("", True)
+        assert(v.build(d) == 0)
+        d = Data("", False)
+        assert(v.build(d) == 0)
+
+    def test_words(self):
+        v = WordTypeQuantities.SensoryRatioCheck()      
+        cases = {"""And the mere sight of the torment, with his fishy eyes and mouth open, his sandy hair inquisitively on end, and his waistcoat heaving with windy arithmetic, made me vicious in my reticence.""": 1, 
+                 """The house was dark and shabby, and the greasy shoulders that had left their mark in Mr. Jaggers's room seemed to have been shuffling up and down the staircase for years.""": 1,
+                 """Much of that! said he, glancing about him over the cold wet flat. I wish I was a frog. Or a eel!""": 2}
+        for (words, count) in cases.items():
+            d = Data(words, True)
+            assert(v.build(d) == count)
+            d = Data(words, False)
+            assert(v.build(d) == count)
+            
+class TestMotionTermsCheck(unittest.TestCase):
+    def test_empty(self):
+        v = WordTypeQuantities.MotionTermsCheck()
+        d = Data("", True)
+        assert(v.build(d) == 0)
+        d = Data("", False)
+        assert(v.build(d) == 0)
+
+    def test_words(self):
+        v = WordTypeQuantities.MotionTermsCheck()      
+        cases = {"""It gave me a terrible turn when I thought so; and as I saw the cattle lifting their heads to gaze after him, I wondered whether they thought so too.""": 1, 
+                 """When it was over, he said, weighing in his hand the purse he had ceased to swing""": 1,
+                 """In the moment when I was withdrawing my head to go quietly away, I saw a great flaming light spring up.""": 2}
+        for (words, count) in cases.items():
+            d = Data(words, True)
+            assert(v.build(d) == count)
+            d = Data(words, False)
+            assert(v.build(d) == count)
+
 class TestGeneralizingTermsCheck(unittest.TestCase):
     def test_empty(self):
         v = WordTypeQuantities.GeneralizingTermsCheck()
