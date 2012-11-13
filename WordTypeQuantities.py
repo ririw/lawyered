@@ -15,14 +15,15 @@ class SummingScentenceTag(ContinuousFeature):
       return nltk.chunk.ne_chunk(tagged)
    def totalBy(self, itemToCountFn, data):
       stepSum = 0
-      tagged = self.tag(data.string)
-      for w in tagged:
+      self.tagged = self.tag(data.string)
+      for w in self.tagged:
          if len(w) == 2:
             stepSum += itemToCountFn(w)
       return stepSum
    def build(self, data):
       assert(isinstance(data, Data))
-      return self.totalBy(self.sumFn, data)
+      tagged = self.tag(data.string)
+      return self.totalBy(self.sumFn, data)/len(self.tagged)
       
 class FileReader(SummingScentenceTag):
    def __init__(self, filename):
