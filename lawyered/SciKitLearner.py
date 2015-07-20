@@ -1,6 +1,8 @@
 from sklearn.naive_bayes import GaussianNB
 from Data import DataSet
 import numpy as np
+import pyprind
+import logging
 from multiprocessing import Pool
 
 def classify_instance(classifiers, classMap, instance):
@@ -16,7 +18,7 @@ class SciKitLearner(object):
       assert(isinstance(classifiers, list))
       classes = [1, 0]
       classMap = {True: 1, False: 0}
-      self.inverseClassMap = {1: 'Truth', 0: 'Lie'} 
+      self.inverseClassMap = {1: 'Truth', 0: 'Lie'}
 
       testFeatures = []
       testClasses = []
@@ -25,21 +27,27 @@ class SciKitLearner(object):
 
       self.classifiers = classifiers
 
+      logging.info('Building dataset over all the classifiers...')
+      total_items = len(testSet) * len(classifiers) \
+              + len(trainSet) * len(classifiers)
+      bar = pyprind.ProgBar(total_items)
       if True:
          for num_instance in enumerate(testSet):
             instance = num_instance[1]
-            print float(num_instance[0])/float(len(testSet))
+            #print float(num_instance[0])/float(len(testSet))
             testFeature = []
             for classifier in classifiers:
                testFeature.append(classifier.build(instance))
+               bar.update()
             testFeatures.append(testFeature)
             testClasses.append(classMap[instance.tag])
          for num_instance in enumerate(trainSet):
             instance = num_instance[1]
-            print float(num_instance[0])/float(len(trainSet))
+            #print float(num_instance[0])/float(len(trainSet))
             trainFeature = []
             for classifier in classifiers:
                trainFeature.append(classifier.build(instance))
+               bar.update()
             trainFeatures.append(trainFeature)
             trainClasses.append(classMap[instance.tag])
       else:
@@ -66,7 +74,7 @@ class SciKitLearner(object):
             feature.append(classifier.build(instance))
          features.append(feature)
       return map(lambda r: self.inverseClassMap[r], self.learner.predict(features))
-   
+
    def predict(self, example):
       feature = []
       for classifier in self.classifiers:

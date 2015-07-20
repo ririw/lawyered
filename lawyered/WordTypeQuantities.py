@@ -7,8 +7,8 @@ prefix = ""
 
 class SummingScentenceTag(ContinuousFeature):
    def tag(self, data):
-      """Break the string in data down into 
-      tokens and then tag them with their 
+      """Break the string in data down into
+      tokens and then tag them with their
       gramatical type"""
       tokens = nltk.word_tokenize(data)
       tagged = nltk.pos_tag(tokens)
@@ -24,14 +24,14 @@ class SummingScentenceTag(ContinuousFeature):
       assert(isinstance(data, Data))
       tagged = self.tag(data.string)
       return self.totalBy(self.sumFn, data)/len(self.tagged)
-      
+
 class FileReader(SummingScentenceTag):
    def __init__(self, filename):
       super(FileReader, self).__init__()
       f = open(filename)
       self.testSet = set(f.read().split('\n'))
       f.close()
-   def sumFn(self, v):  
+   def sumFn(self, v):
       if str(v[0]).lower() in self.testSet:
          return 1
       else:
@@ -55,7 +55,7 @@ class ModifierCheck(SummingScentenceTag):
 class WordQuantity(SummingScentenceTag):
 	def sumFn(self,v):
 		if str(v[0]) in string.punctuation:
-			return 0    
+			return 0
 		else:
 			return 1
 
@@ -66,7 +66,7 @@ class CausationCheck(FileReader):
 class TentativeCheck(FileReader):
 	def __init__(self):
 		super(TentativeCheck, self).__init__(prefix + 'resources/Tentative.txt')
-            
+
 class FirstPersonSingularPronoun(FileReader):
 	def __init__(self):
 		super(FirstPersonSingularPronoun, self).__init__(prefix + 'resources/1stPersonSingularPronouns.txt')
@@ -78,15 +78,15 @@ class FirstPersonPluralPronoun(FileReader):
 class ThirdPersonPronoun(FileReader):
 	def __init__(self):
 		super(ThirdPersonPronoun, self).__init__(prefix + 'resources/3rdPersonPronouns.txt')
-		
+
 class SensoryRatioCheck(FileReader):
 	def __init__(self):
 		super(SensoryRatioCheck, self).__init__(prefix + 'resources/Sensory.txt')
-		
+
 class MotionTermsCheck(FileReader):
 	def __init__(self):
 		super(MotionTermsCheck, self).__init__(prefix + 'resources/MotionTerms.txt')
-	            
+
 class GeneralizingTermsCheck(FileReader):
    def __init__(self):
         super(GeneralizingTermsCheck, self).__init__(prefix + 'resources/GeneralizingTerms.txt')
@@ -103,7 +103,7 @@ featureList = [
       SensoryRatioCheck,
       MotionTermsCheck,
       GeneralizingTermsCheck
-   ]  
+   ]
 
 
 

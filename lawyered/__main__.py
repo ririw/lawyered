@@ -1,6 +1,6 @@
 import argparse
 import LexicalDiversity
-import WordTypeQuantities 
+import WordTypeQuantities
 import Learners
 import Data
 import sys
@@ -11,30 +11,30 @@ parser = argparse.ArgumentParser(
       description="Run lie detection on some files")
 parser.add_argument(
    'files',
-   metavar='fileList', 
+   metavar='fileList',
    type=str,
    nargs='*',
    help='the list of files with statements to classify')
 parser.add_argument(
    '-t',
-   metavar='trainFiles', 
+   metavar='trainFiles',
    type=str,
    nargs='+',
    help='A list of files upon which to train classifiers')
 parser.add_argument(
    '-f',
-   metavar='fileList', 
+   metavar='fileList',
    type=str,
    nargs='+',
    help='the list of files with statements to classify')
 parser.add_argument(
    '-s',
-   metavar='classifierSaveFile', 
+   metavar='classifierSaveFile',
    type=str,
    help='Where to save the produced classifiers')
 parser.add_argument(
    '-l',
-   metavar='classifierLoadFile', 
+   metavar='classifierLoadFile',
    type=str,
    help='Where to load the classifiers (overrides -t argument)\n [WARNING: NEVER LOAD UNTRUSTED CLASSIFIERS]')
 parser.add_argument(
@@ -46,12 +46,12 @@ parser.add_argument(
 
 if __name__ == "__main__":
    args = parser.parse_args()
-   pwdstring = sys.argv[0]
+   pwdstring = ""
    pwd = os.path.join(os.path.split(pwdstring)[:-1])[0]
    if pwd:
       WordTypeQuantities.prefix = pwd + "/"
    features = map(
-         lambda c: c(), 
+         lambda c: c(),
          (LexicalDiversity.featureList + WordTypeQuantities.featureList))
 
    learners = None
@@ -92,7 +92,7 @@ if __name__ == "__main__":
             learners = pickle.load(f)
       learner = Learners.learners[classifier]
 
-   
+
    if args.f:
       print "\nClassifying using file: ", args.f
       # Assuming we are using the entire test set
@@ -101,9 +101,9 @@ if __name__ == "__main__":
       learner = learners[classifier]
       for example in testData:
           print example.string
-          classification = learner.predict(example) 
+          classification = learner.predict(example)
           print classification
-      
+
    if args.s:
       print learners
       with open(args.s, 'w') as f:
